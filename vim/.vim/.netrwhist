@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/run/media/koswu/c585aa50-1cca-4fe3-94ac-bc754e60cc8a/lineage'
+let g:netrw_dirhist_0='/home/koswu/Programming/docker/smartgraph-dock/docker/ingress'
+let g:netrw_dirhist_9='/home/koswu/Programming/docker/smartgraph-dock/docker'
+let g:netrw_dirhist_8='/home/koswu/Programming/docker/smartgraph-dock/docker/neo4j'
+let g:netrw_dirhist_7='/home/koswu/Programming/docker/smartgraph-dock/aurora'
+let g:netrw_dirhist_6='/home/koswu/Programming/docker/smartgraph-dock/docker/mysql'
+let g:netrw_dirhist_5='/home/koswu/Programming/htmllab/lab5/public'
+let g:netrw_dirhist_4='/etc/systemd/system/chinadns.service.d'
+let g:netrw_dirhist_3='/home/koswu/blog/myblog/source/_posts/fix-popints-with-scheme'
+let g:netrw_dirhist_2='/home/koswu/blog/myblog/themes/next'
