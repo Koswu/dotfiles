@@ -6,16 +6,16 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/koswu/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
+
+# modify ZSH_COSTOM file place
+export ZSH_CUSTOM="$HOME/.zsh_custom"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
-
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,6 +70,8 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  zsh-autosuggestions
+  zsh-syntax-highlighting
   git
   extract
   z
@@ -101,36 +103,13 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
-#screenfetch
+# set local zshrc only work for this PC, will not sync
+if [ -f ~/.zshrc_local ]; then
+    . ~/.zshrc_local
+fi
+
 neofetch
-
-initconda()
-{
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-	__conda_setup="$('/home/koswu/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-	if [ $? -eq 0 ]; then
-	    eval "$__conda_setup"
-	else
-	    if [ -f "/home/koswu/miniconda3/etc/profile.d/conda.sh" ]; then
-	        . "/home/koswu/miniconda3/etc/profile.d/conda.sh"
-	    else
-	        export PATH="/home/koswu/miniconda3/bin:$PATH"
-	    fi
-	fi
-	unset __conda_setup
-	# <<< conda initialize <<<
-}
-
-#proxy 
-export http_proxy="http://192.168.0.105:3128"
-export https_proxy="http://192.168.0.105:3128"
-
