@@ -112,4 +112,8 @@ if [ -f ~/.zshrc_local ]; then
     . ~/.zshrc_local
 fi
 
-neofetch
+# show icon when installed neofetch
+if command -v neofetch &> /dev/null
+then
+	neofetch
+fi
