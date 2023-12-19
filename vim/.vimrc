@@ -8,6 +8,7 @@ endif
 
 call plug#begin('~/.vim/bundle')
 Plug 'Raimondi/delimitMate'
+Plug 'alvan/vim-closetag'
 call plug#end()
 
 
