@@ -1,0 +1,13 @@
+# 1. 启用语法高亮
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# 2. 启用自动建议 (Devcontainer 风格)
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# 3. 修复全局按键映射 (处理 Backspace/Delete/Home/End)
+bindkey "^[[3~" delete-char
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+
+# 4. 设置默认 Prompt 风格 (贴近 LiveCD)
+# 如果你希望完全一致，grml 默认已经做得很好，这里可以留空或进行微调

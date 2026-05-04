@@ -1,0 +1,57 @@
+source /etc/zsh/zshrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+
+# 加载插件
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# 解决终端按键映射问题（BackSpace/Delete 等）
+bindkey "^[[3~" delete-char
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+
+
+sdbx() {
+    local SDBX_BASE=$(mktemp -d /tmp/home_sdbx.XXXXXX)
+    local CWD=$(pwd)
+    local REAL_HOME="$HOME"
+
+    # 1. 准备家目录的 Overlay 结构
+    mkdir -p "$SDBX_BASE/upper" "$SDBX_BASE/work" "$SDBX_BASE/merged"
+
+    cleanup() {
+        fusermount -u "$SDBX_BASE/merged" 2>/dev/null
+        rm -rf "$SDBX_BASE"
+    }
+    trap cleanup EXIT
+
+    # 2. 仅对家目录挂载 FUSE 叠层
+    # 由于是你自己的目录，不存在 nobody 权限断层问题，直接挂载即可
+    fuse-overlayfs -o "lowerdir=$REAL_HOME,upperdir=$SDBX_BASE/upper,workdir=$SDBX_BASE/work" "$SDBX_BASE/merged"
+
+    # 3. 启动 bwrap
+    bwrap \
+        --tmpfs / \
+        --proc /proc --dev /dev \
+        --tmpfs /tmp --chmod 1777 /tmp \
+        --tmpfs /run --chmod 0755 /run \
+        --ro-bind /usr /usr \
+        --ro-bind /etc /etc \
+        --ro-bind /home/linuxbrew /home/linuxbrew \
+        --symlink usr/bin /bin \
+        --symlink usr/sbin /sbin \
+        --symlink usr/lib /lib \
+        --symlink usr/lib64 /lib64 \
+        --bind "$SDBX_BASE/merged" "$REAL_HOME" \
+        --bind "$CWD" "$CWD" \
+        --chdir "$CWD" \
+        --unshare-all \
+        --unshare-uts --hostname "light-sandbox" \
+        --share-net \
+        --die-with-parent \
+        --setenv HOME "$REAL_HOME" \
+        --setenv PATH "/usr/local/bin:/usr/bin:/bin" \
+        "${@:-/bin/zsh}"
+}
+
+fastfetch

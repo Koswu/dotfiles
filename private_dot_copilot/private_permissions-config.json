@@ -1,0 +1,18 @@
+{
+  "locations": {
+    "/home/koswu/code/ansible-inventory": {
+      "tool_approvals": [
+        {
+          "kind": "write"
+        }
+      ]
+    },
+    "/home/koswu/code/quant-agent": {
+      "tool_approvals": [
+        {
+          "kind": "write"
+        }
+      ]
+    }
+  }
+}

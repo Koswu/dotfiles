@@ -1,0 +1,13 @@
+#!/bin/bash
+# Deploy zsh config files to /etc/zsh/
+# Hashes to trigger re-run on file change:
+# zshrc.local: {{ include "etc_zsh/zshrc.local" | sha256sum }}
+# zprofile: {{ include "etc_zsh/zprofile" | sha256sum }}
+set -e
+
+SCRIPT_DIR="{{ .chezmoi.sourceDir }}/etc_zsh"
+
+echo "Deploying /etc/zsh/ configs..."
+sudo cp "$SCRIPT_DIR/zshrc.local" /etc/zsh/zshrc.local
+sudo cp "$SCRIPT_DIR/zprofile" /etc/zsh/zprofile
+echo "Done."
