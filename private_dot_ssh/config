@@ -1,0 +1,19 @@
+Host *
+  IdentityFile ~/.ssh/id_ed25519
+
+Host nas
+  HostName 10.233.0.14
+  User koswu
+
+Host sh-router
+  HostName 10.233.0.1
+  User root
+ 
+Host pc
+  HostName 10.233.0.191
+  User koswu
+ 
+Host dev-cip
+  HostName 43.128.76.241
+  User root
+  IdentityFile ~/.ssh/id_ed25519_cipher
